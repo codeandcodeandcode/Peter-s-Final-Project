@@ -84,8 +84,15 @@ const show = data => {
 
 //Created a function to handle anny errors from the try and catch block
 const handleErrors = ()=> {
-    
+
     document.querySelector('main').innerHTML = "<h6 class='fatal'>Failed to load the resources.</h6>";
+}
+
+//Added an synchronous function to get every single blog post
+async function getPost(id) {
+    const response = await fetch("https://dummyapi.io/data/v1/post/"+id+"", {headers: headers});
+    const data = await response.json();
+    return data;
 }
 
 
