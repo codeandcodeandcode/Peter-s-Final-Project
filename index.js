@@ -6,3 +6,9 @@ let postContainer = document.querySelector("#a-b-c");
 let lr = document.getElementById("lr");
 let pops =  document.querySelector(".popup");
 let usersCounter = 0;
+
+const allPosts = async () =>{
+
+
+
+}   
