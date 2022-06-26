@@ -84,6 +84,7 @@ const show = data => {
 
 //Created a function to handle anny errors from the try and catch block
 const handleErrors = ()=> {
+    
     document.querySelector('main').innerHTML = "<h6 class='fatal'>Failed to load the resources.</h6>";
 }
 
