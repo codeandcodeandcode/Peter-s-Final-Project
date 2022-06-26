@@ -23,3 +23,17 @@ const allPosts = async () =>{
 const showPopup = ()=>{
     pops.classList.add("active");
   }
+
+  const handleForm = (form)=>{
+    let txt = document.querySelector("textarea");
+    form.preventDefault();
+    let l = txt.value;
+    if(l == 0) {alert("Please enter a comment."); return}
+    else {
+       txt.value = ""; 
+    }
+    let m = document.createElement("div");
+    usersCounter++;
+    m.innerHTML = `<div class="comment"><h5>User${usersCounter} wrote:</h5><p>${l}</p></div>`
+    form.target.after(m);
+}
