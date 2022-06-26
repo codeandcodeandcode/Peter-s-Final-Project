@@ -55,7 +55,7 @@ const show = data => {
             e.preventDefault();
 
           //Used a promise to fetch the data from the API
-          getPost(a.id).then(d=>{
+        getPost(a.id).then(d=>{
             let t = "";
             d.tags.forEach(g=>t+=`<span>${g}</span>`);
             let post = document.createElement('div');
@@ -70,6 +70,18 @@ const show = data => {
             <button type="submit">Save Comment</button>
         </form>  
         `;
+                //Added an event listener for all form submits
+                document.querySelector("#d-e-f").appendChild(post);
+                post.classList.add("large");
+                showPopup();
+                document.querySelector("form").addEventListener("submit", e=> {
+                    handleForm(e);
+                })
+            });
+         })
+    });
+}
+
 
 
 
