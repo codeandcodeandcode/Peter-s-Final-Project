@@ -49,8 +49,33 @@ const show = data => {
         post.dataset.id = a.id;
          postContainer.appendChild(post);
 
+         //Added an event listener for the blog to open up a popup
+
          post.addEventListener("click", e=>{
             e.preventDefault();
+
+          //Used a promise to fetch the data from the API
+          getPost(a.id).then(d=>{
+            let t = "";
+            d.tags.forEach(g=>t+=`<span>${g}</span>`);
+            let post = document.createElement('div');
+            post.innerHTML = `
+            <div><img src="${d.image}"></div>
+            <div class="d-c"><h4>${d.text}</h4><p>Likes: ${d.likes}</p></div>
+            <div class="extra"><p>Published on: ${d.publishDate}</p><p>Written By: ${d.owner.firstName}  ${d.owner.lastName}</p></div>
+            <div class="tags">${t}</div>
+            <form action="">
+            <label for="">Add a comment</label>
+            <textarea name="" placeholder="Your comment..."></textarea>
+            <button type="submit">Save Comment</button>
+        </form>  
+        `;
+
+
+
+
+
+
 
 
 
