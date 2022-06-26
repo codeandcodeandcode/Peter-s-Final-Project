@@ -19,6 +19,7 @@ const allPosts = async () =>{
         handleErrors();
         lr.style.display = "none";
     }
-
-
-}   
+} 
+const showPopup = ()=>{
+    pops.classList.add("active");
+  }
