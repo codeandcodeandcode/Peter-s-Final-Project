@@ -37,3 +37,26 @@ const showPopup = ()=>{
     m.innerHTML = `<div class="comment"><h5>User${usersCounter} wrote:</h5><p>${l}</p></div>`
     form.target.after(m);
 }
+
+const show = data => {
+    data.data.forEach(a => {
+        let post = document.createElement('a');
+        post.innerHTML = `
+        <div><img src="${a.image}"></div>
+        <div class="d-c"><h4>${a.text}</h4><p>Likes: ${a.likes}</p></div>
+        `;
+        post.setAttribute("href", "#");
+        post.dataset.id = a.id;
+         postContainer.appendChild(post);
+
+         post.addEventListener("click", e=>{
+            e.preventDefault();
+
+
+
+
+
+
+
+    
+}   
