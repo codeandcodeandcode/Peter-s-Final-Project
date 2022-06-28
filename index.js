@@ -95,6 +95,15 @@ async function getPost(id) {
     return data;
 }
 
+getPost("osivniNSiosjwiwerox").then(a=>console.log(a));
+}
+
+//Created an event listener for the popup close
+document.querySelector(".close").addEventListener("click", a=>{
+    a.preventDefault();
+    pops.classList.remove("active");
+    pops.querySelector(".large").remove();
+})
 
 
 
