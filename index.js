@@ -1,19 +1,13 @@
 window.addEventListener("load", ()=> {
-    //added api credentials
+    //fetch
     const headers = {"app-id": "62a39b05e29594c9c6420196"};
     
-    
-    //got all required containers and saved them in variables
     let postContainer = document.querySelector("#a-b-c");
     let lr = document.getElementById("lr");
     let pops =  document.querySelector(".popup");
-    let usersCounter = 0;
     
-    
-    //created an asynchronous function to fetch all posts
     const allPosts = async () =>{
     
-        // added a try and catch block to listen for any errors incase of any from the API 
         try{
             const r = await fetch("https://dummyapi.io/data/v1/post?limit=9", {headers: headers});
             const d = await r.json();
@@ -25,33 +19,13 @@ window.addEventListener("load", ()=> {
             handleErrors();
             lr.style.display = "none";
         }
+    
     }
     
-    
-    //created a function handler for the popup 
     const showPopup = ()=>{
       pops.classList.add("active");
     }
     
-    
-    // created a function to get handle the comments form
-    const handleForm = (form)=>{
-        let txt = document.querySelector("textarea");
-        form.preventDefault();
-        let l = txt.value;
-        if(l == 0) {alert("Please enter a comment."); return}
-        else {
-           txt.value = ""; 
-        }
-        let m = document.createElement("div");
-        usersCounter++;
-        m.innerHTML = `<div class="comment"><h5>User${usersCounter} wrote:</h5><p>${l}</p></div>`
-        form.target.after(m);
-    }
-    
-    
-    
-    // created a function to show every single post from the API response 
     const show = data => {
         data.data.forEach(a => {
             let post = document.createElement('a');
@@ -63,15 +37,9 @@ window.addEventListener("load", ()=> {
             post.dataset.id = a.id;
              postContainer.appendChild(post);
     
-    
-    
-    
-             //added an event listener for the blog to open up a popup
              post.addEventListener("click", e=>{
                 e.preventDefault();
-    
-                //used a promise to fetch the data from the API
-                getPost(a.id).then(d=>{
+                let postData = getPost(a.id).then(d=>{
                     let t = "";
                     d.tags.forEach(g=>t+=`<span>${g}</span>`);
                     let post = document.createElement('div');
@@ -86,53 +54,37 @@ window.addEventListener("load", ()=> {
                     <button type="submit">Save Comment</button>
                 </form>
                     `;
-    
-    
-                    //added an event listener for all form submits
                     document.querySelector("#d-e-f").appendChild(post);
                     post.classList.add("large");
                     showPopup();
                     document.querySelector("form").addEventListener("submit", e=> {
-                        handleForm(e);
+                        e.preventDefault();
+                        let l = document.querySelector("textarea").value;
+                        e.target.innerHTML = `
+                        <div class="comment"><h5>Latest comment</h5><p>Peter wrote:</p><p>${l}</p></div>
+                        `;
+                    
                     })
                 });
              })
         });
     }
     
-    
-    
-    //created a function to handle anny errors from the try and catch block
     const handleErrors = ()=> {
         document.querySelector('main').innerHTML = "<h6 class='fatal'>Failed to load the resources.</h6>";
     }
     
-    
-    
-    //added an synchronous function to get every single blog post
     async function getPost(id) {
         const response = await fetch("https://dummyapi.io/data/v1/post/"+id+"", {headers: headers});
         const data = await response.json();
         return data;
     }
     
-    
-    
-    //tested out the get post function
-    //getPost("osivniNSiosjwiwerox").then(a=>console.log(a));
-    
-    
-    
-    
-    //created an event listener for the popup close
     document.querySelector(".close").addEventListener("click", a=>{
         a.preventDefault();
         pops.classList.remove("active");
         pops.querySelector(".large").remove();
     })
     
-    
-    
-    //called the get all posts function and tested
     allPosts();
     });
